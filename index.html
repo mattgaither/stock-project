@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <header class="block">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/index.html">
+          <img src="./assets/img/stock_image.jpg" width="112" height="50">
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="true" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            Stocks
+          </a>
+
+          <a class="navbar-item">
+            Crypto
+          </a>
+          <a class="navbar-item">
+            News
+          </a>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light">
+                Log in
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <h2 class="subtitle is-3">News</h2>
+      <div class="columns">
+        <div class="column">
+          <div class="box" id = "company_news" data-state = "hidden">
+            <h2 class="subtitle is-4 is-flex is-justify-content-space-between">Company News
+              <div class="field has-addons ">
+                <div class="control">
+                  <input class="input" type="text" placeholder="FB">
+                </div>
+                <div class="control">
+                  <a class="button is-info" id="company_button"> Go!</a>
+                </div>
+              </div>
+            </h2>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box" id = "market_news">
+            <h2 class="subtitle is-4 is-flex is-justify-content-space-between">General Market News</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <h2 class="subtitle is-3 is-flex is-justify-content-space-between mt-6">Stocks
+        <div class="field has-addons ">
+          <div class="control">
+            <input class="input" type="text" placeholder="Find a Stock">
+          </div>
+          <div class="control">
+            <a class="button is-info">
+              Go!
+            </a>
+          </div>
+        </div>
+      </h2>
+      <div class="columns is-gapless">
+        <div class="column">
+          <div class="box">
+            <div class="columns ">
+              <div class="column" id="stock_symbol">
+                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Symbol</h1>
+              </div>
+              <div class="column" id="stock_desc">
+                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Description</h1>
+              </div>
+              <div class="column" id="stock_price">
+                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Price</h1>
+              </div>
+              <div class="column" id="stock_url">
+                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Url</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-one-quarter" id="column">
+          <div class="box" id="box">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum eveniet dignissimos ab fuga?
+            Error fugit explicabo suscipit dolorem ab dignissimos, ut vel quia velit soluta debitis aliquid
+            hic qui possimus.
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+        <h2 class="subtitle is-3 is-flex is-justify-content-space-between mt-6">Cryptocurrency
+          <div class="field has-addons ">
+            <div class="control">
+              <input class="input" type="text" placeholder="Find a Crypto">
+            </div>
+            <div class="control">
+              <a class="button is-info">
+                Go!
+              </a>
+            </div>
+          </div>
+        </h2>
+        <div class="columns">
+          <div class="column is-three-quarters is-flex" id="column">
+            <div class="box" id="box">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure nobis voluptates praesentium
+              distinctio impedit, ad dolorum quas obcaecati laborum reiciendis eos architecto non vero, alias
+              reprehenderit expedita nam ipsam sunt?
+            </div>
+          </div>
+          <div class="column" id="column">
+            <div class="box" id="box">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum eveniet dignissimos ab fuga?
+              Error fugit explicabo suscipit dolorem ab dignissimos, ut vel quia velit soluta debitis aliquid
+              hic qui possimus.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
