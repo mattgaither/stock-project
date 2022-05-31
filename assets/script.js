@@ -46,25 +46,25 @@ async function getStocks() {
 }
 
 async function getStockSymbol() {
-    var symbolURL = 'https://finnhub.io/api/v1/stock/symbol?exchange=US&token=ca270qqad3iaqnc2o93g&mic=XNAS&currency=USD';
+    var symbolURL = 'https://finnhub.io/api/v1/stock/symbol?exchange=US&token=c9sqnaqad3ib0ug2vn2g&mic=XNAS&currency=USD';
     const symbolResponse = (await fetch(symbolURL)).json();
     return symbolResponse
 }
 
 async function getPrice(symbol) {
-    var priceURL = 'https://finnhub.io/api/v1/quote?symbol=' + symbol + '&token=ca270qqad3iaqnc2o93g';
+    var priceURL = 'https://finnhub.io/api/v1/quote?symbol=' + symbol + '&token=c9sqnaqad3ib0ug2vn2g';
     const priceResponse = (await fetch(priceURL)).json();
     return priceResponse
 }
 
 async function getWebsiteURL(symbol) {
-    var profileURL = 'https://finnhub.io/api/v1/stock/profile2?symbol=' + symbol + '&token=ca270qqad3iaqnc2o93g';
+    var profileURL = 'https://finnhub.io/api/v1/stock/profile2?symbol=' + symbol + '&token=c9sqnaqad3ib0ug2vn2g';
     const profileResponse = (await fetch(profileURL)).json();
     return profileResponse
 }
 
 async function getCompanyNews(symbol) {
-    var companyNews = 'https://finnhub.io/api/v1/company-news?symbol='+symbol+'&from=2022-05-11&to=2022-05-12&token=ca270qqad3iaqnc2o93g';
+    var companyNews = 'https://finnhub.io/api/v1/company-news?symbol='+symbol+'&from=2022-05-11&to=2022-05-12&token=c9sqnaqad3ib0ug2vn2g';
     var newList = document.createElement('ol');
     var state = company_news.getAttribute("data-state");
     fetch(companyNews)
@@ -94,7 +94,7 @@ async function getCompanyNews(symbol) {
 }
 
 function getMarketNews() {
-    var marketNews = 'https://finnhub.io/api/v1/news?category=general&token=ca270qqad3iaqnc2o93g';
+    var marketNews = 'https://finnhub.io/api/v1/news?category=general&token=c9sqnaqad3ib0ug2vn2g';
     const newList = document.createElement('ol');
     fetch(marketNews)
     .then((resp) => {
