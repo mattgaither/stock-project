@@ -46,7 +46,7 @@ async function getStocks() {
 }
 
 async function getStockSymbol() {
-    var symbolURL = 'https://finnhub.io/api/v1/stock/symbol?exchange=US&token=c9sqnaqad3ib0ug2vn2g&mic=XNAS&currency=USD';
+    var symbolURL = 'https://finnhub.io/api/v1/stock/symbol?exchange=US&token=ca270qqad3iaqnc2o93g&mic=XNAS&currency=USD';
     const symbolResponse = (await fetch(symbolURL)).json();
     return symbolResponse
 }
