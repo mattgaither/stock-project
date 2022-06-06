@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.css">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="assets/style.css">
   <title>Document</title>
 </head>
 
@@ -99,7 +99,7 @@
             <h1 class=" is-size-3 has-text-weight-bold has-text-centered ">Common Stocks</h1>
             <div class="columns">
               <div class="column" >
-                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered" > Stock Symbol</h1>
+                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-left" > Stock Symbol</h1>
                 <div id="cs_symbol"></div>
               </div>
               <div class="column">
@@ -107,7 +107,7 @@
                 <div id="cs_desc"></div>
               </div>
               <div class="column">
-                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Price</h1>
+                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-left">Stock Price</h1>
                 <div id="cs_price"></div>
               </div>
             </div>
@@ -117,10 +117,14 @@
           <div class="box" id="box">
             <h1 class=" is-size-3 has-text-weight-bold has-text-centered">Your Stocks</h1>
             <div class="columns">
-              <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock</h1>
-              <div id="ys_stock"></div>
-              <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered">Price</h1>
-              <div id="ys_price"></div>
+              <div class="column">
+                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered, ">Stock Description</h1>
+                <div id="ys_symbol"></div>
+              </div>
+              <div class="column">
+                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Price</h1>
+                <div id="ys_price"></div>
+              </div>
             </div>
           </div>
         </div>

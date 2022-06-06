@@ -8,6 +8,7 @@ var company_news = document.querySelector("#company_news");
 var company_button = document.querySelector("#company_button");
 var stock_button = document.querySelector("#stock-button");
 var stock_lookup = document.querySelector("#stock-lookup");
+var userSymbols = [];
 
 async function getCommonStocks() {
     var priceList = document.createElement('ul');
@@ -45,34 +46,57 @@ async function getCommonStocks() {
 }
 
 async function getYourStocks () {
+    if (localStorage.getItem("stockSymbols")) {
+        userSymbols = JSON.parse(localStorage.getItem("stockSymbols"));
+    }
     var priceList = document.createElement('ul');
     var symbolList = document.createElement('ul');
-    var descList = document.createElement('ul');
 
     // let s = await getStockSymbol()
-    for (var i = 0; i < stocks.length; i++) {
-        let symbol = stocks[i];
+    for (var i = 0; i < userSymbols.length; i++) {
+        let symbol = userSymbols[i];
         let price = await getPrice(symbol)
         let profile = await getWebsiteURL(symbol)
 
         var pli = document.createElement('li');
         var sli = document.createElement('li');
-        // var uli = document.createElement('li');
-        var dli = document.createElement('li');
         
         var aTag = document.createElement('a');
         sli.appendChild(aTag);
         
         pli.textContent = price.c;
-        dli.textContent = profile.name;
         aTag.textContent = symbol;
         aTag.href = profile.weburl;
 
         priceList.appendChild(pli);
         symbolList.appendChild(sli);
-        // urlList.appendChild(uli);
-        descList.appendChild(dli);
     }
+    ys_price.appendChild(priceList);
+    ys_symbol.appendChild(symbolList);
+    // ys_desc.appendChild(descList);
+}
+
+async function addNewStock() {
+    var priceList = document.createElement('ul');
+    var symbolList = document.createElement('ul');
+
+    let symbol = userSymbols[userSymbols.length - 1];
+    let price = await getPrice(symbol)
+    let profile = await getWebsiteURL(symbol)
+
+    var pli = document.createElement('li');
+    var sli = document.createElement('li');
+    
+    var aTag = document.createElement('a');
+    sli.appendChild(aTag);
+    
+    pli.textContent = price.c;
+    aTag.textContent = symbol;
+    aTag.href = profile.weburl;
+
+    priceList.appendChild(pli);
+    symbolList.appendChild(sli);
+
     ys_price.appendChild(priceList);
     ys_symbol.appendChild(symbolList);
     // ys_desc.appendChild(descList);
@@ -145,25 +169,23 @@ function getMarketNews() {
     market_news.appendChild(newList);
 }
 
+function storageHandler (data) {
+    if (stock_lookup.value) {
+        data.push(stock_lookup.value);
+        localStorage.setItem("stockSymbols", JSON.stringify(data));
+    }
+}
+
 getCommonStocks();
 getMarketNews();
+getYourStocks();
 getCompanyNews("FB");
 
 company_button.addEventListener("click", function() {
     console.log("hello");
 });
 
-stock_button.addEventListener("click", async function() {
-    var userSymbols = [];
-    if (localStorage.getItem("stockSymbols")) {
-        var userSymbols = JSON.parse(localStorage.getItem("stockSymbols"));
-    }
-
-    if (stock_lookup.value) {
-        userSymbols.push(stock_lookup.value);
-        localStorage.setItem("stockSymbols", JSON.stringify(userSymbols));
-    }
-    for (var i = 0; i < userSymbols.length; i++) {
-        console.log(userSymbols[i]);
-    }
+stock_button.addEventListener("click", function () {
+    storageHandler(userSymbols);
+    addNewStock();
 });
