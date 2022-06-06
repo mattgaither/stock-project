@@ -15,7 +15,7 @@ async function getCommonStocks() {
     var symbolList = document.createElement('ul');
     var descList = document.createElement('ul');
 
-    const stocks = ["AAPL", "AMZN", "HD", "DOCU", "NVDA", "NFLX", "MU", "M", "BABA", "SNOW", "TSLA", "TNDM", "NKLA", "NIO", "TGT"];
+    const stocks = ["AAPL", "AMZN", "NVDA", "NFLX", "MU", "M", "BABA", "SNOW", "TSLA", "TNDM", "NKLA", "NIO", "TGT"];
 
     // let s = await getStockSymbol()
     for (var i = 0; i < stocks.length; i++) {

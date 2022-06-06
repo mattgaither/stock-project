@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.css">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/style.css">
   <title>Document</title>
 </head>
 
@@ -96,27 +96,32 @@
       <div class="columns is-gapless">
         <div class="column">
           <div class="box">
-            <div class="columns ">
-              <div class="column" id="stock_symbol">
-                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Symbol</h1>
+            <h1 class=" is-size-3 has-text-weight-bold has-text-centered ">Common Stocks</h1>
+            <div class="columns">
+              <div class="column" >
+                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered" > Stock Symbol</h1>
+                <div id="cs_symbol"></div>
               </div>
-              <div class="column" id="stock_desc">
-                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Description</h1>
+              <div class="column">
+                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered, ">Stock Description</h1>
+                <div id="cs_desc"></div>
               </div>
-              <div class="column" id="stock_price">
+              <div class="column">
                 <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Price</h1>
-              </div>
-              <div class="column" id="stock_url">
-                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Url</h1>
+                <div id="cs_price"></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="column is-one-quarter" id="column">
+        <div class="column is-half" id="column">
           <div class="box" id="box">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum eveniet dignissimos ab fuga?
-            Error fugit explicabo suscipit dolorem ab dignissimos, ut vel quia velit soluta debitis aliquid
-            hic qui possimus.
+            <h1 class=" is-size-3 has-text-weight-bold has-text-centered">Your Stocks</h1>
+            <div class="columns">
+              <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock</h1>
+              <div id="ys_stock"></div>
+              <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered">Price</h1>
+              <div id="ys_price"></div>
+            </div>
           </div>
         </div>
       </div>
