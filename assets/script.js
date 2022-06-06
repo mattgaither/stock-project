@@ -1,9 +1,8 @@
-var stock_price = document.querySelector("#cs_price");
-var stock_symbol = document.querySelector("#cs_symbol");
-var stock_desc = document.querySelector("#cs_desc");
-var stock_price = document.querySelector("#ys_price");
-var stock_symbol = document.querySelector("#ys_symbol");
-var stock_desc = document.querySelector("#ys_desc");
+var cs_price = document.querySelector("#cs_price");
+var cs_symbol = document.querySelector("#cs_symbol");
+var cs_desc = document.querySelector("#cs_desc");
+var ys_price = document.querySelector("#ys_price");
+var ys_symbol = document.querySelector("#ys_symbol");
 var market_news = document.querySelector("#market_news");
 var company_news = document.querySelector("#company_news");
 var company_button = document.querySelector("#company_button");
@@ -40,9 +39,9 @@ async function getCommonStocks() {
         symbolList.appendChild(sli);
         descList.appendChild(dli);
     }
-    // stock_price.appendChild(priceList);
-    // stock_symbol.appendChild(symbolList);
-    // stock_desc.appendChild(descList);
+    cs_price.appendChild(priceList);
+    cs_symbol.appendChild(symbolList);
+    cs_desc.appendChild(descList);
 }
 
 async function getYourStocks () {
@@ -74,9 +73,9 @@ async function getYourStocks () {
         // urlList.appendChild(uli);
         descList.appendChild(dli);
     }
-    stock_price.appendChild(priceList);
-    stock_symbol.appendChild(symbolList);
-    stock_desc.appendChild(descList);
+    ys_price.appendChild(priceList);
+    ys_symbol.appendChild(symbolList);
+    // ys_desc.appendChild(descList);
 }
 
 async function getStockSymbol() {
