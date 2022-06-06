@@ -18,13 +18,6 @@
           <img src="./assets/img/stock_image.jpg" width="112" height="50">
         </a>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="true" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
           <a class="navbar-item">
@@ -38,29 +31,14 @@
             News
           </a>
         </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a class="button is-light">
-                Log in
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
   </header>
   <main>
     <div class="container">
-      <h2 class="subtitle is-3">News</h2>
+      <h2 class="subtitle is-3 mt-4">News</h2>
       <div class="columns">
         <div class="column">
           <div class="box" id = "company_news" data-state = "hidden">
-            <h2 class="subtitle is-4 is-flex is-justify-content-space-between">Company News
+            <h2 class="subtitle is-4 is-flex is-justify-content-space-between has-text-weight-bold">Company News
               <div class="field has-addons ">
                 <div class="control">
                   <input class="input" type="text" placeholder="FB">
@@ -74,17 +52,17 @@
         </div>
         <div class="column">
           <div class="box" id = "market_news">
-            <h2 class="subtitle is-4 is-flex is-justify-content-space-between">General Market News</h2>
+            <h2 class="subtitle is-4 is-flex is-justify-content-space-between has-text-weight-bold">General Market News</h2>
           </div>
         </div>
       </div>
     </div>
     
     <div class="container">
-      <h2 class="subtitle is-3 is-flex is-justify-content-space-between mt-6">Stocks
+      <h2 class="subtitle is-3 is-flex is-justify-content-space-between mt-4">Stocks
         <div class="field has-addons ">
           <div class="control">
-            <input class="input" type="text" placeholder="Find a Stock" id="stock-lookup" >
+            <input class="input" type="text" placeholder="Find a stock symbol" id="stock-lookup" >
           </div>
           <div class="control">
             <a class="button is-info" id="stock-button">
@@ -96,18 +74,18 @@
       <div class="columns is-gapless">
         <div class="column">
           <div class="box">
-            <h1 class=" is-size-3 has-text-weight-bold has-text-centered ">Common Stocks</h1>
+            <h1 class=" is-size-3 has-text-weight-bold has-text-centered mb-3">Common Stocks</h1>
             <div class="columns">
-              <div class="column" >
-                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered" > Stock Symbol</h1>
+              <div>
+                <h1 class=" column is-size-5 has-text-weight-bold has-background-light has-text-centered" > Stock Symbol</h1>
                 <div id="cs_symbol"></div>
               </div>
-              <div class="column">
-                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered, ">Stock Description</h1>
+              <div >
+                <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered, ">Stock Description</h1>
                 <div id="cs_desc"></div>
               </div>
-              <div class="column">
-                <h1 class="is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Price</h1>
+              <div>
+                <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock Price</h1>
                 <div id="cs_price"></div>
               </div>
             </div>
@@ -115,7 +93,7 @@
         </div>
         <div class="column is-half" id="column">
           <div class="box" id="box">
-            <h1 class=" is-size-3 has-text-weight-bold has-text-centered">Your Stocks</h1>
+            <h1 class=" is-size-3 has-text-weight-bold has-text-centered mb-3">Your Stocks</h1>
             <div class="columns">
               <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered">Stock</h1>
               <div id="ys_stock"></div>
@@ -125,39 +103,55 @@
           </div>
         </div>
       </div>
+    </div>
 
-
-      <div class="container">
-        <h2 class="subtitle is-3 is-flex is-justify-content-space-between mt-6">Cryptocurrency
-          <div class="field has-addons ">
-            <div class="control">
-              <input class="input" type="text" placeholder="Find a Crypto">
-            </div>
-            <div class="control">
-              <a class="button is-info">
-                Go!
-              </a>
+    <div class="container">
+      <h2 class="subtitle is-3 is-flex is-justify-content-space-between mt-4">Cryptocurrency
+        <div class="field has-addons ">
+          <div class="control">
+            <input class="input" type="text" placeholder="Find a crypto symbol" id="crypto-lookup" >
+          </div>
+          <div class="control">
+            <a class="button is-info" id="crypto-button">
+              Go!
+            </a>
+          </div>
+        </div>
+      </h2>
+      <div class="columns is-gapless">
+        <div class="column">
+          <div class="box">
+            <h1 class="is-size-3 has-text-weight-bold has-text-centered mb-3 ">Common Cryptocurrencies</h1>
+            <div class="columns">
+              <div>
+                <h1 class=" column is-size-5 has-text-weight-bold has-background-light has-text-centered" > Crypto Symbol</h1>
+                <div id="cs_symbol"></div>
+              </div>
+              <div >
+                <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered"> Crypto Names</h1>
+                <div id="cs_desc"></div>
+              </div>
+              <div >
+                <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered"> Crypto Price</h1>
+                <div id="cs_price"></div>
+              </div>
             </div>
           </div>
-        </h2>
-        <div class="columns">
-          <div class="column is-three-quarters is-flex" id="column">
-            <div class="box" id="box">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure nobis voluptates praesentium
-              distinctio impedit, ad dolorum quas obcaecati laborum reiciendis eos architecto non vero, alias
-              reprehenderit expedita nam ipsam sunt?
-            </div>
-          </div>
-          <div class="column" id="column">
-            <div class="box" id="box">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum eveniet dignissimos ab fuga?
-              Error fugit explicabo suscipit dolorem ab dignissimos, ut vel quia velit soluta debitis aliquid
-              hic qui possimus.
+        </div>
+        <div class="column is-half" id="column">
+          <div class="box" id="box">
+            <h1 class=" is-size-3 has-text-weight-bold has-text-centered mb-3">Your Crypto</h1>
+            <div class="columns">            
+              <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered">Cryptocurrency</h1>
+              <div id="yc_crypto"></div>
+              <h1 class="column is-size-5 has-text-weight-bold has-background-light has-text-centered">Price</h1>
+              <div id="yc_price"></div>              
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </main>
   <script src="./assets/script.js"></script>
 </body>
