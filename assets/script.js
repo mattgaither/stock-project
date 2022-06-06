@@ -1,15 +1,17 @@
-var stock_price = document.getElementById("stock_price");
-var stock_symbol = document.getElementById("stock_symbol");
-var stock_desc = document.getElementById("stock_desc");
-var stock_url = document.getElementById("stock_url");
-var market_news = document.getElementById("market_news");
-var company_news = document.getElementById("company_news");
+var cs_price = document.querySelector("#cs_price");
+var cs_symbol = document.querySelector("#cs_symbol");
+var cs_desc = document.querySelector("#cs_desc");
+var ys_price = document.querySelector("#ys_price");
+var ys_symbol = document.querySelector("#ys_symbol");
+var market_news = document.querySelector("#market_news");
+var company_news = document.querySelector("#company_news");
 var company_button = document.querySelector("#company_button");
+var stock_button = document.querySelector("#stock-button");
+var stock_lookup = document.querySelector("#stock-lookup");
 
-async function getStocks() {
+async function getCommonStocks() {
     var priceList = document.createElement('ul');
     var symbolList = document.createElement('ul');
-    var urlList = document.createElement('ul');
     var descList = document.createElement('ul');
 
     const stocks = ["AAPL", "AMZN", "NVDA", "NFLX", "MU", "M", "BABA", "SNOW", "TSLA", "TNDM", "NKLA", "NIO", "TGT"];
@@ -22,27 +24,58 @@ async function getStocks() {
 
         var pli = document.createElement('li');
         var sli = document.createElement('li');
-        var uli = document.createElement('li');
+        // var uli = document.createElement('li');
         var dli = document.createElement('li');
         
         var aTag = document.createElement('a');
-        uli.appendChild(aTag);
+        sli.appendChild(aTag);
         
         pli.textContent = price.c;
-        sli.textContent = symbol;
         dli.textContent = profile.name;
-        aTag.textContent = profile.weburl;
+        aTag.textContent = symbol;
         aTag.href = profile.weburl;
 
         priceList.appendChild(pli);
         symbolList.appendChild(sli);
-        urlList.appendChild(uli);
         descList.appendChild(dli);
     }
-    stock_price.appendChild(priceList);
-    stock_symbol.appendChild(symbolList);
-    stock_desc.appendChild(descList);
-    stock_url.appendChild(urlList);
+    cs_price.appendChild(priceList);
+    cs_symbol.appendChild(symbolList);
+    cs_desc.appendChild(descList);
+}
+
+async function getYourStocks () {
+    var priceList = document.createElement('ul');
+    var symbolList = document.createElement('ul');
+    var descList = document.createElement('ul');
+
+    // let s = await getStockSymbol()
+    for (var i = 0; i < stocks.length; i++) {
+        let symbol = stocks[i];
+        let price = await getPrice(symbol)
+        let profile = await getWebsiteURL(symbol)
+
+        var pli = document.createElement('li');
+        var sli = document.createElement('li');
+        // var uli = document.createElement('li');
+        var dli = document.createElement('li');
+        
+        var aTag = document.createElement('a');
+        sli.appendChild(aTag);
+        
+        pli.textContent = price.c;
+        dli.textContent = profile.name;
+        aTag.textContent = symbol;
+        aTag.href = profile.weburl;
+
+        priceList.appendChild(pli);
+        symbolList.appendChild(sli);
+        // urlList.appendChild(uli);
+        descList.appendChild(dli);
+    }
+    ys_price.appendChild(priceList);
+    ys_symbol.appendChild(symbolList);
+    // ys_desc.appendChild(descList);
 }
 
 async function getStockSymbol() {
@@ -110,14 +143,27 @@ function getMarketNews() {
         }
     });
     market_news.appendChild(newList);
-
 }
 
-getStocks();
+getCommonStocks();
 getMarketNews();
 getCompanyNews("FB");
 
 company_button.addEventListener("click", function() {
     console.log("hello");
-    getCompanyNews("AAPL");
-  });
+});
+
+stock_button.addEventListener("click", async function() {
+    var userSymbols = [];
+    if (localStorage.getItem("stockSymbols")) {
+        var userSymbols = JSON.parse(localStorage.getItem("stockSymbols"));
+    }
+
+    if (stock_lookup.value) {
+        userSymbols.push(stock_lookup.value);
+        localStorage.setItem("stockSymbols", JSON.stringify(userSymbols));
+    }
+    for (var i = 0; i < userSymbols.length; i++) {
+        console.log(userSymbols[i]);
+    }
+});
