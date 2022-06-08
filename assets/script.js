@@ -275,7 +275,7 @@ stock_button.addEventListener("click", function () {
 });
 
 crypto_button.addEventListener("click", function () {
-  getCrypto();
+  getYourCrypto();
 });
 
 modalBg.addEventListener("click", function () {
