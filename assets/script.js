@@ -8,6 +8,8 @@ var company_news = document.querySelector("#company_news");
 var company_button = document.querySelector("#company_button");
 var stock_button = document.querySelector("#stock-button");
 var stock_lookup = document.querySelector("#stock-lookup");
+var crypto_button = document.querySelector("#crypto-button");
+var crypto_lookup = document.querySelector("#crypto-lookup");
 var userSymbols = [];
 
 async function getCommonStocks() {
@@ -176,6 +178,17 @@ function storageHandler (data) {
     }
 }
 
+async function crypto () {
+    var query = crypto_lookup.value;
+    var url = "https://api.coingecko.com/api/v3/search?query=" + query;
+    fetch(url)
+    .then((data) => {
+        return data.json()
+      }).then((info) => {
+            console.log(info.coins);
+    });
+}
+
 getCommonStocks();
 getMarketNews();
 getYourStocks();
@@ -188,4 +201,8 @@ company_button.addEventListener("click", function() {
 stock_button.addEventListener("click", function () {
     storageHandler(userSymbols);
     addNewStock();
+});
+
+crypto_button.addEventListener("click", function () {
+    crypto();
 });
