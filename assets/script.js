@@ -161,6 +161,10 @@ async function getCompanyNews(symbol) {
       return resp.json();
     })
     .then((data) => {
+      if (data.length === 0) {
+        errorHandler('news', symbol);
+        return;
+      }
       for (let i = 0; i < 3; i++) {
         // console.log(data[i].headline);
         var nli = document.createElement("li");
@@ -170,19 +174,19 @@ async function getCompanyNews(symbol) {
         aTag.href = data[i].url;
         newList.appendChild(nli);
       }
-    });
-    // debugger;
-  if (state === "hidden") {
-    //default
+      // debugger;
+    if (state === "hidden") {
+      //default
+      newList.setAttribute("id", "current-list");
+      company_news.appendChild(newList);
+      company_news.dataset.state = "visible";
+    } else {
+      var oldList = document.querySelector("#current-list");
+      company_news.replaceChild(newList, oldList);
+      // company_news.dataset.state = "hidden";
+    }
     newList.setAttribute("id", "current-list");
-    company_news.appendChild(newList);
-    company_news.dataset.state = "visible";
-  } else {
-    var oldList = document.querySelector("#current-list");
-    company_news.replaceChild(newList, oldList);
-    // company_news.dataset.state = "hidden";
-  }
-  newList.setAttribute("id", "current-list");
+    });
 }
 
 function getMarketNews() {
@@ -206,15 +210,18 @@ function getMarketNews() {
   market_news.appendChild(newList);
 }
 
-function storageHandler(data) {
-  if (stock_lookup.value) {
-    data.push(stock_lookup.value);
-    localStorage.setItem("stockSymbols", JSON.stringify(data));
-  }
-}
-
-function getYourCrypto() {
+async function getYourCrypto() {
   //   let modalCardContainer = document.querySelector("#modal-card-container");
+      let query = crypto_lookup.value;
+      let url = "https://api.coingecko.com/api/v3/search?query=" + query;
+      var response = await fetch(url);
+      var data = await response.json();
+      
+      if (data.coins.length === 0) {
+        errorHandler("crypto", query);
+        return;
+      }
+
       let modalMsg = document.querySelector('#modal-msg');
       modalMsg.textContent = "Did you mean: ";
       let modalContainer = document.createElement('div');
@@ -229,42 +236,34 @@ function getYourCrypto() {
       }
       modalBody.appendChild(modalContainer);
   
-      let query = crypto_lookup.value;
-      let url = "https://api.coingecko.com/api/v3/search?query=" + query;
-      fetch(url)
-          .then((data) => {
-          return data.json();
-          })
-          .then((info) => {
-          for (let i = 0; i < info.coins.length; i++) {
-              console.log(info.coins[i].name);
-              let column = document.querySelector('#crypto-column-' + ((i % 3) + 1) )
-  
-              let card = document.createElement('div');
-              card.classList.add('card', 'has-background-grey-light');
-  
-              let cardImgDiv = document.createElement('div');
-              cardImgDiv.classList.add("card-image", "has-text-centered", "px-6", "py-2", 'has-background-white');
-              let cardImg = document.createElement('img');
-              cardImg.src = info.coins[i].large;
-              
-              let cardContentDiv = document.createElement('div');
-              cardContentDiv.classList.add('card-content');
-              let cardSym = document.createElement('p');
-              cardSym.classList.add('has-text-weight-bold');
-              cardSym.textContent = info.coins[i].symbol;
-              let cardName = document.createElement('p');
-              cardName.classList.add('has-text-centered')
-              cardName.textContent = info.coins[i].name;
-              
-              cardImgDiv.append(cardImg, cardSym);
-              cardContentDiv.appendChild(cardName);
-              card.append(cardImgDiv, cardContentDiv);
-              column.appendChild(card);
-          }
-          });
+      for (let i = 0; i < data.coins.length; i++) {
+          console.log(data.coins[i].name);
+          let column = document.querySelector('#crypto-column-' + ((i % 3) + 1) )
+
+          let card = document.createElement('div');
+          card.classList.add('card', 'has-background-grey-light');
+
+          let cardImgDiv = document.createElement('div');
+          cardImgDiv.classList.add("card-image", "has-text-centered", "px-6", "py-2", 'has-background-white');
+          let cardImg = document.createElement('img');
+          cardImg.src = data.coins[i].large;
+          
+          let cardContentDiv = document.createElement('div');
+          cardContentDiv.classList.add('card-content');
+          let cardSym = document.createElement('p');
+          cardSym.classList.add('has-text-weight-bold');
+          cardSym.textContent = data.coins[i].symbol;
+          let cardName = document.createElement('p');
+          cardName.classList.add('has-text-centered')
+          cardName.textContent = data.coins[i].name;
+          
+          cardImgDiv.append(cardImg, cardSym);
+          cardContentDiv.appendChild(cardName);
+          card.append(cardImgDiv, cardContentDiv);
+          column.appendChild(card);
+      }
       modal.classList.add("is-active");
-  }
+}
 
 function getCrypto () {
     var priceList = document.createElement("ul");
@@ -304,6 +303,76 @@ function getCrypto () {
         })
 }
 
+function storageHandler(data) {
+  if (stock_lookup.value) {
+    data.push(stock_lookup.value);
+    localStorage.setItem("stockSymbols", JSON.stringify(data));
+  }
+}
+
+function errorHandler (err, errVal) {
+  switch (err) {
+    case "news":
+      newsError(errVal);
+      break;
+    case "stock":
+      stockError(errVal);
+      break;
+    case "crypto":
+      cryptoError(errVal);
+      break;
+  }
+}
+
+function closeModal () {
+
+}
+
+function newsError(msg) {
+  let modalMsg = document.querySelector('#modal-msg');
+  let modalBtn = document.createElement('button');
+  // modalBtn.textContent = "OK";
+  // modalBtn.addEventListener('click', function () {
+  //   modal.classList.remove('is-active');
+  //   modalBody.removeChild(modalBtn);
+  // })
+  modalMsg.textContent = `Couldn't find news for company "${msg}"`;
+  // modalBody.appendChild(modalBtn);
+  modal.classList.add('is-active');
+}
+
+function cryptoError(msg) {
+  let modalMsg = document.querySelector('#modal-msg');
+  // let modalBtn = document.createElement('button');
+  // modalBtn.textContent = "OK";
+  // modalBtn.addEventListener('click', function () {
+  //   modal.classList.remove('is-active');
+  //   modalBody.removeChild(modalBtn);
+  // })
+  modalMsg.textContent = `Couldn't find coin or token for "${msg}"`;
+  // modalBody.appendChild(modalBtn);
+  modal.classList.add('is-active');
+}
+
+function stockError(msg) {
+  let modalMsg = document.querySelector('#modal-msg');
+  // let modalBtn = document.createElement('button');
+  // modalBtn.textContent = "OK";
+  // modalBtn.addEventListener('click', function () {
+  //   modal.classList.remove('is-active');
+  //   modalBody.removeChild(modalBtn);
+  // })
+  modalMsg.textContent = `Couldn't find stocks for company "${msg}"`;
+  // modalBody.appendChild(modalBtn);
+  modal.classList.add('is-active');
+}
+
+async function validateStock (stock) {
+  var url = `https://finnhub.io/api/v1/company-news?symbol=${stock}&from=2022-05-11&to=2022-05-12&token=c9sqnaqad3ib0ug2vn2g`;
+  const response = (await fetch(url)).json();
+  return response;
+}
+
 getCommonStocks();
 getMarketNews();
 getYourStocks();
@@ -315,7 +384,15 @@ company_button.addEventListener("click", function () {
   getCompanyNews(newsVal);
 });
 
-stock_button.addEventListener("click", function () {
+stock_button.addEventListener("click", async function () {
+  let stockVal = document.querySelector("#stock-lookup").value;
+  let valid = await validateStock(stockVal);
+  console.log(valid);
+
+  if (valid.length <= 0) {
+    errorHandler("stock", stockVal);
+    return;
+  }
   storageHandler(userSymbols);
   addNewStock();
 });
