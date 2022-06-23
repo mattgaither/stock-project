@@ -11,4 +11,5 @@
     height: 55%;
     margin-bottom: 30px;
     box-shadow: 0 0 10px black;
+    cursor: pointer;
 }

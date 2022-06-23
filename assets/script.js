@@ -6,6 +6,8 @@ var cc_symbol = document.querySelector("#cc_symbol");
 var cc_desc = document.querySelector("#cc_desc");
 var ys_price = document.querySelector("#ys_price");
 var ys_symbol = document.querySelector("#ys_symbol");
+var yc_price = document.querySelector("#yc_price");
+var yc_crypto = document.querySelector("#yc_crypto");
 var market_news = document.querySelector("#market_news");
 var company_news = document.querySelector("#company_news");
 var company_button = document.querySelector("#company_button");
@@ -16,7 +18,8 @@ var crypto_lookup = document.querySelector("#crypto-lookup");
 var modal = document.querySelector(".modal");
 var modalBg = document.querySelector(".modal-background");
 let modalBody = document.querySelector('#modal-body');
-var userSymbols = [];
+var userStocks = [];
+var userTokens = [];
 
 async function getCommonStocks() {
   var priceList = document.createElement("ul");
@@ -69,14 +72,14 @@ async function getCommonStocks() {
 
 async function getYourStocks() {
   if (localStorage.getItem("stockSymbols")) {
-    userSymbols = JSON.parse(localStorage.getItem("stockSymbols"));
+    userStocks = JSON.parse(localStorage.getItem("stockSymbols"));
   }
   var priceList = document.createElement("ul");
   var symbolList = document.createElement("ul");
 
   // let s = await getStockSymbol()
-  for (var i = 0; i < userSymbols.length; i++) {
-    let symbol = userSymbols[i];
+  for (var i = 0; i < userStocks.length; i++) {
+    let symbol = userStocks[i];
     let price = await getPrice(symbol);
     let profile = await getWebsiteURL(symbol);
 
@@ -102,7 +105,7 @@ async function addNewStock() {
   var priceList = document.createElement("ul");
   var symbolList = document.createElement("ul");
 
-  let symbol = userSymbols[userSymbols.length - 1];
+  let symbol = userStocks[userStocks.length - 1];
   let price = await getPrice(symbol);
   let profile = await getWebsiteURL(symbol);
 
@@ -210,7 +213,7 @@ function getMarketNews() {
   market_news.appendChild(newList);
 }
 
-async function getYourCrypto() {
+async function loadCrypto() {
   //   let modalCardContainer = document.querySelector("#modal-card-container");
       let query = crypto_lookup.value;
       let url = "https://api.coingecko.com/api/v3/search?query=" + query;
@@ -242,6 +245,7 @@ async function getYourCrypto() {
 
           let card = document.createElement('div');
           card.classList.add('card', 'has-background-grey-light');
+          card.setAttribute('data-id', data.coins[i].id);
 
           let cardImgDiv = document.createElement('div');
           cardImgDiv.classList.add("card-image", "has-text-centered", "px-6", "py-2", 'has-background-white');
@@ -261,11 +265,19 @@ async function getYourCrypto() {
           cardContentDiv.appendChild(cardName);
           card.append(cardImgDiv, cardContentDiv);
           column.appendChild(card);
+          card.addEventListener('click', async function () {
+            var token = await getTokenData(this.getAttribute('data-id'));
+            cryptoStorageHandler(token);
+            modal.classList.remove("is-active");
+            crypto_lookup.value = '';
+            addNewCrypto();
+          })
       }
       modal.classList.add("is-active");
+      
 }
 
-function getCrypto () {
+function getCryptoData () {
     var priceList = document.createElement("ul");
     var symbolList = document.createElement("ul");
     var descList = document.createElement("ul");
@@ -303,11 +315,69 @@ function getCrypto () {
         })
 }
 
-function storageHandler(data) {
-  if (stock_lookup.value) {
-    data.push(stock_lookup.value);
-    localStorage.setItem("stockSymbols", JSON.stringify(data));
+async function getYourCrypto () {
+  if (localStorage.getItem("cryptoSymbols")) {
+    userTokens = JSON.parse(localStorage.getItem("cryptoSymbols"));
   }
+  var priceList = document.createElement("ul");
+  var symbolList = document.createElement("ul");
+
+  // let s = await getStockSymbol()
+  for (var i = 0; i < userTokens.length; i++) {
+    let id = userTokens[i];
+    let tokenData = await getTokenData(id);
+
+    var pli = document.createElement("li");
+    var sli = document.createElement("li");
+
+    pli.textContent = tokenData.market_data.current_price.usd;
+    sli.textContent = tokenData.symbol.toUpperCase();
+
+    priceList.appendChild(pli);
+    symbolList.appendChild(sli);
+  }
+  yc_price.appendChild(priceList);
+  yc_crypto.appendChild(symbolList);
+}
+
+async function addNewCrypto() {
+  console.lo
+  var priceList = document.createElement("ul");
+  var symbolList = document.createElement("ul");
+
+  let id = userTokens[userTokens.length - 1];
+  let tokenData = await getTokenData(id);
+
+  var pli = document.createElement("li");
+  var sli = document.createElement("li");
+
+  pli.textContent = tokenData.market_data.current_price.usd;
+  sli.textContent = tokenData.symbol.toUpperCase();
+
+  priceList.appendChild(pli);
+  symbolList.appendChild(sli);
+
+  yc_price.appendChild(priceList);
+  yc_crypto.appendChild(symbolList);
+}
+
+async function getTokenData (id) {
+  var url = `https://api.coingecko.com/api/v3/coins/${id}`;
+  var responseData = (await fetch(url)).json();
+  return responseData;
+}
+
+function stockStorageHandler (data) {
+  data.push(stock_lookup.value);
+  localStorage.setItem("stockSymbols", JSON.stringify(data));
+}
+
+function cryptoStorageHandler (token) {
+  if (localStorage.getItem("cryptoSymbols")) {
+    userTokens = JSON.parse(localStorage.getItem("cryptoSymbols"));
+  }
+  userTokens.push(token.id);
+  localStorage.setItem("cryptoSymbols", JSON.stringify(userTokens));
 }
 
 function errorHandler (err, errVal) {
@@ -322,10 +392,6 @@ function errorHandler (err, errVal) {
       cryptoError(errVal);
       break;
   }
-}
-
-function closeModal () {
-
 }
 
 function newsError(msg) {
@@ -376,7 +442,8 @@ async function validateStock (stock) {
 getCommonStocks();
 getMarketNews();
 getYourStocks();
-getCrypto();
+getCryptoData();
+getYourCrypto();
 getCompanyNews("FB");
 
 company_button.addEventListener("click", function () {
@@ -393,12 +460,12 @@ stock_button.addEventListener("click", async function () {
     errorHandler("stock", stockVal);
     return;
   }
-  storageHandler(userSymbols);
+  stockStorageHandler(userStocks);
   addNewStock();
 });
 
 crypto_button.addEventListener("click", function () {
-  getYourCrypto();
+  loadCrypto();
 });
 
 modalBg.addEventListener("click", function () {
