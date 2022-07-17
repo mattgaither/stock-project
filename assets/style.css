@@ -13,3 +13,27 @@
     box-shadow: 0 0 10px black;
     cursor: pointer;
 }
+
+img {
+    height: 125px;
+}
+
+body {
+    background-image: url(/assets/Image/pexels-john-guccione-wwwadvergroupcom-3483098.jpg) ;
+    background-size: auto;
+}
+
+nav {
+    background-color: green;
+    margin: 25px 125px 25px 125px;
+}
+
+nav a {
+    color:  rgb(241, 241, 40);
+    box-sizing: border-box;
+
+}
+
+ header h1, .subtitle {
+    color: blue;
+}

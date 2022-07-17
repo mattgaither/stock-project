@@ -11,37 +11,34 @@
 </head>
 
 <body>
-  <header class="block">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/index.html">
-          <img src="./assets/Image/stocks-and-cypto.jpg" width="112" height="100">
-        </a>
-        <div class="navbar-item">
-          <h1>Stockwise</h1>
-        </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" >
-            Stocks
-          </a>
-
-          <a class="navbar-item">
-            Crypto
-          </a>
-          <a class="navbar-item">
-            News
-          </a>
-        </div>
+  <header>
+    <div class="is-flex is-justify-content-space-evenly is-align-items-center">
+      <img src="./assets/Image/stocks-and-cypto.jpg" alt="Photo of a stock graph and a hand holding a crypto coin">
+      <h1 class="is-size-1 has-text-weight-bold ">Stockwise</h1>
+    </div>
+    <nav class="is-size-3 has-text-weight-bold ">
+      <ul class=" is-flex is-justify-content-space-evenly is-flex-wrap-wrap">
+        <li>
+          <a  href="/index.html#news">News</a>
+        </li>
+        <li>
+          <a href="/index.html#stocks">Stocks</a>
+        </li>
+        <li>
+          <a href="/index.html#crypto">Cryptocurrency</a>
+        </li>
+      </ul>
+    </nav>
   </header>
+
+
   <main>
     <div class="container">
-      <h2 class="subtitle is-3 mt-4">News</h2>
+      <h2 class="subtitle is-3 mt-4" id="news">News</h2>
       <div class="columns">
         <div class="column">
           <div class="box" id = "company_news" data-state = "hidden">
-            <h2 class="subtitle is-4 is-flex is-justify-content-space-between has-text-weight-bold">Company News
+            <h2 class=" is-size-4 is-flex is-justify-content-space-between has-text-weight-bold">Company News
               <div class="field has-addons ">
                 <div class="control">
                   <input class="input" type="text" placeholder="FB" id="company-news">
@@ -55,7 +52,7 @@
         </div>
         <div class="column">
           <div class="box" id = "market_news">
-            <h2 class="subtitle is-4 is-flex is-justify-content-space-between has-text-weight-bold">General Market News</h2>
+            <h2 class=" is-size-4 is-flex is-justify-content-space-between has-text-weight-bold">General Market News</h2>
           </div>
         </div>
       </div>
@@ -96,7 +93,7 @@
         </div>
         <div class="column is-half" id="column">
           <div class="box" id="box">
-            <h1 class=" is-size-3 has-text-weight-bold has-text-centered mb-3">Your Stocks</h1>
+            <h1 class=" is-size-3 has-text-weight-bold has-text-centered mb-3" id="stocks">Your Stocks</h1>
             <div class="columns">
               <div class="column">
                 <h1 class="is-size-4 has-text-weight-bold has-background-light has-text-center">Stock Description</h1>
@@ -113,7 +110,7 @@
     </div>
 
     <div class="container">
-      <h2 class="subtitle is-3 is-flex is-justify-content-space-between mt-4">Cryptocurrency
+      <h2 class="subtitle is-3 is-flex is-justify-content-space-between mt-4" id="crypto">Cryptocurrency
         <div class="field has-addons ">
           <div class="control">
             <input class="input" type="text" placeholder="Find a crypto symbol" id="crypto-lookup" >
@@ -125,6 +122,7 @@
           </div>
         </div>
       </h2>
+      
       <div class="columns is-gapless">
         <div class="column">
           <div class="box">
@@ -145,6 +143,7 @@
             </div>
           </div>
         </div>
+
         <div class="column is-half" id="column">
           <div class="box" id="box">
             <h1 class=" is-size-3 has-text-weight-bold has-text-centered mb-3">Your Crypto</h1>
