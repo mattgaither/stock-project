@@ -20,7 +20,7 @@ img {
 
 body {
     background-image: url(./Image/background.jpg) ;
-    background-size: auto;
+    background-size: cover ;
 }
 
 nav {
